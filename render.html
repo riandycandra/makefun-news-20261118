@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1024px;
+    height: 1024px;
+    overflow: hidden;
+    background: #f5f1e8;
+    color: #14171a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .page {
+    width: 1024px;
+    height: 1024px;
+    padding: 18px 22px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    background: linear-gradient(180deg, #f8f4eb 0%, #f1ece0 100%);
+  }
+  /* Masthead */
+  .masthead {
+    border-top: 5px solid #111827;
+    border-bottom: 2px solid #111827;
+    padding: 8px 0 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .mast-left h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    color: #0f172a;
+  }
+  .mast-sub {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #475569;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+  .mast-right {
+    text-align: right;
+  }
+  .date-pill {
+    display: inline-block;
+    background: #b91c1c;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    padding: 5px 12px;
+    border-radius: 3px;
+  }
+  .edition {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #334155;
+    margin-top: 4px;
+    letter-spacing: 0.6px;
+  }
+
+  /* Grid rows */
+  .row-top {
+    display: grid;
+    grid-template-columns: 1.38fr 1fr;
+    gap: 12px;
+    height: 366px;
+  }
+  .row-mid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    height: 294px;
+  }
+  .row-bot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    height: 214px;
+  }
+
+  .card {
+    background: #fffdf8;
+    border: 1.5px solid #cbd5e1;
+    border-top: 4px solid #1e293b;
+    padding: 11px 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  .card.hero { border-top-color: #b91c1c; background: #ffffff; }
+  .card.gulf { border-top-color: #d97706; }
+  .card.europe { border-top-color: #1d4ed8; }
+  .card.americas { border-top-color: #0f766e; }
+  .card.climate { border-top-color: #15803d; }
+  .card.science { border-top-color: #6d28d9; }
+  .card.tech { border-top-color: #0369a1; }
+
+  .kicker {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .hero .kicker { color: #b91c1c; }
+  .gulf .kicker { color: #b45309; }
+  .europe .kicker { color: #1d4ed8; }
+  .americas .kicker { color: #0f766e; }
+  .climate .kicker { color: #15803d; }
+  .science .kicker { color: #6d28d9; }
+  .tech .kicker { color: #0369a1; }
+
+  h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.13;
+    color: #0f172a;
+    margin-bottom: 7px;
+  }
+  .row-mid h2, .row-bot h2 {
+    font-size: 16.5px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  ul.bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  ul.bullets li {
+    font-size: 12.6px;
+    line-height: 1.32;
+    color: #1e293b;
+    padding-left: 11px;
+    position: relative;
+  }
+  ul.bullets li::before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #64748b;
+    font-weight: 900;
+  }
+  .row-mid ul.bullets li, .row-bot ul.bullets li {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  strong { color: #0f172a; font-weight: 750; }
+
+  .viz {
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    font-weight: 700;
+    color: #475569;
+    letter-spacing: 0.4px;
+    border-top: 1.5px solid #94a3b8;
+    padding-top: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div class="mast-left">
+      <h1>THE WORLD IN ONE DAY</h1>
+      <div class="mast-sub">Global News Visual Briefing · Geopolitics · Security · Economy · Climate · Science</div>
+    </div>
+    <div class="mast-right">
+      <div class="date-pill">WED · 18 NOVEMBER 2026</div>
+      <div class="edition">6 REGIONS · VERIFIED WIRE SUMMARY</div>
+    </div>
+  </header>
+
+  <section class="row-top">
+    <article class="card hero">
+      <div>
+        <div class="kicker">Asia-Pacific · 33rd APEC Summit · Shenzhen</div>
+        <h2>Xi Greets Trump at APEC as Putin Pitches Multipolar Order</h2>
+        <div class="viz" style="height: 130px; margin-bottom: 8px;">
+          <svg viewBox="0 0 540 148" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="#1e3a5f"/>
+              </linearGradient>
+            </defs>
+            <rect width="540" height="148" fill="url(#sky)"/>
+            <!-- Shenzhen Skyline silhouettes -->
+            <rect x="20" y="64" width="28" height="84" fill="#1e293b"/>
+            <rect x="54" y="42" width="34" height="106" fill="#334155"/>
+            <polygon points="102,148 118,22 134,148" fill="#1e293b"/>
+            <rect x="148" y="54" width="32" height="94" fill="#334155"/>
+            <rect x="370" y="48" width="30" height="100" fill="#1e293b"/>
+            <rect x="408" y="34" width="38" height="114" fill="#334155"/>
+            <rect x="454" y="60" width="28" height="88" fill="#1e293b"/>
+            <rect x="490" y="72" width="30" height="76" fill="#334155"/>
+            <!-- APEC Arc -->
+            <path d="M 175 128 Q 270 18 365 128" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="5,4"/>
+            <circle cx="270" cy="42" r="20" fill="#0284c7" stroke="#bae6fd" stroke-width="2"/>
+            <text x="270" y="46" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800" font-family="sans-serif">APEC</text>
+            <!-- Three Summit Nodes -->
+            <rect x="172" y="82" width="58" height="44" rx="5" fill="#dc2626" stroke="#fecaca" stroke-width="1.5"/>
+            <text x="201" y="101" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">CHINA</text>
+            <text x="201" y="117" text-anchor="middle" fill="#fee2e2" font-size="10" font-weight="700">Xi</text>
+
+            <rect x="241" y="82" width="58" height="44" rx="5" fill="#2563eb" stroke="#bfdbfe" stroke-width="1.5"/>
+            <text x="270" y="101" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">U.S.</text>
+            <text x="270" y="117" text-anchor="middle" fill="#dbeafe" font-size="10" font-weight="700">Trump</text>
+
+            <rect x="310" y="82" width="58" height="44" rx="5" fill="#475569" stroke="#e2e8f0" stroke-width="1.5"/>
+            <text x="339" y="101" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">RUSSIA</text>
+            <text x="339" y="117" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Putin</text>
+          </svg>
+        </div>
+        <ul class="bullets">
+          <li><strong>Keynote &amp; Embrace:</strong> Chinese President Xi Jinping rallied APEC against protectionism and greeted U.S. President Donald Trump ahead of expected trilateral talks.</li>
+          <li><strong>Bilateral Agenda:</strong> U.S. and Russian officials confirmed a one-on-one Trump–Putin meeting on Ukraine and nuclear arms control; Putin also met Indonesian President Prabowo Subianto.</li>
+          <li><strong>Trade Relief:</strong> Canadian PM Mark Carney negotiated tariff reliefs with Beijing as Trump cited trade progress on his Asian tour.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card gulf">
+      <div>
+        <div class="kicker">Middle East · Persian Gulf &amp; Levant</div>
+        <h2>U.S. and Iran Trade Strikes Across the Gulf</h2>
+        <div class="viz" style="height: 122px; margin-bottom: 8px;">
+          <svg viewBox="0 0 380 122" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="380" height="122" fill="#fffbeb"/>
+            <!-- Water -->
+            <path d="M 90 18 Q 190 45 330 82 L 330 122 L 40 122 Q 60 65 90 18 Z" fill="#bae6fd" opacity="0.65"/>
+            <!-- Labels for locations -->
+            <circle cx="92" cy="40" r="8" fill="#d97706"/>
+            <text x="106" y="44" fill="#0f172a" font-size="11" font-weight="800">KUWAIT (Ali Al Salem)</text>
+            <circle cx="152" cy="74" r="8" fill="#d97706"/>
+            <text x="166" y="78" fill="#0f172a" font-size="11" font-weight="800">BAHRAIN (U.S. Radar)</text>
+            <circle cx="288" cy="46" r="10" fill="#dc2626"/>
+            <text x="288" y="29" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="800">QESHM ISLAND</text>
+            <!-- Strike arc -->
+            <path d="M 152 74 Q 220 20 288 46" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="5,3"/>
+            <text x="190" y="104" text-anchor="middle" fill="#9a3412" font-size="10.5" font-weight="800">RETALIATORY STRIKES · NOV 18</text>
+          </svg>
+        </div>
+        <ul class="bullets">
+          <li><strong>Gulf Escalation:</strong> U.S. struck an Iranian missile site on Qeshm Island after Iranian drones hit U.S. radar in Bahrain and targeted Kuwait; Houthis struck Saudi pipeline pumps.</li>
+          <li><strong>Gaza &amp; Israel:</strong> A U.S. "Board of Peace" UN report faulted Israel and Hamas on ceasefire terms; Israel elected Matan Kahana as Knesset Speaker.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="row-mid">
+    <article class="card europe">
+      <div>
+        <div class="kicker">Europe · Ukraine &amp; Turkey</div>
+        <h2>Ukraine Civilian Toll Jumps 95% YoY</h2>
+        <div class="viz" style="height: 78px; margin-bottom: 7px;">
+          <svg viewBox="0 0 300 78" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="78" fill="#eff6ff"/>
+            <rect x="26" y="42" width="44" height="24" fill="#93c5fd" rx="2"/>
+            <rect x="88" y="14" width="44" height="52" fill="#dc2626" rx="2"/>
+            <text x="48" y="36" text-anchor="middle" fill="#1e3a8a" font-size="10" font-weight="800">2025</text>
+            <text x="110" y="38" text-anchor="middle" fill="#fff" font-size="13" font-weight="900">+95%</text>
+            <text x="214" y="33" text-anchor="middle" fill="#1e3a8a" font-size="12" font-weight="800">UN OHCHR</text>
+            <text x="214" y="49" text-anchor="middle" fill="#334155" font-size="10.5" font-weight="700">Oct. Civilian Toll</text>
+          </svg>
+        </div>
+        <ul class="bullets">
+          <li><strong>Drone &amp; Missile Surge:</strong> UN reported a 95% YoY spike in October Ukrainian civilian casualties; Denmark and Ukraine launched a defense AI pact.</li>
+          <li><strong>Turkey Media Raid:</strong> CPJ condemned Turkish authorities for raiding and seizing independent broadcaster <em>Sözcü TV</em>.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card americas">
+      <div>
+        <div class="kicker">Americas · U.S. Security &amp; Senate</div>
+        <h2>DNI: Tech Outages Not a Cyberattack</h2>
+        <div class="viz" style="height: 78px; margin-bottom: 7px;">
+          <svg viewBox="0 0 300 78" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="78" fill="#f0fdfa"/>
+            <rect x="16" y="14" width="126" height="50" rx="5" fill="#0f766e"/>
+            <text x="79" y="36" text-anchor="middle" fill="#fff" font-size="11" font-weight="800">FAA · NSA · MSFT</text>
+            <text x="79" y="52" text-anchor="middle" fill="#ccfbf1" font-size="10" font-weight="700">Maintenance Cause</text>
+            <rect x="158" y="14" width="126" height="50" rx="5" fill="#1d4ed8"/>
+            <text x="221" y="36" text-anchor="middle" fill="#fff" font-size="12" font-weight="900">56 DEM SEATS</text>
+            <text x="221" y="52" text-anchor="middle" fill="#dbeafe" font-size="10" font-weight="700">AK Senate: Peltola</text>
+          </svg>
+        </div>
+        <ul class="bullets">
+          <li><strong>Congressional Testimony:</strong> DNI Jay Clayton told lawmakers major FAA, NSA, and Microsoft outages came from updates, not hostile hackers.</li>
+          <li><strong>Final Senate Seat:</strong> Democrat Mary Peltola won Alaska's Senate race, sealing a 56-seat Democratic majority.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card climate">
+      <div>
+        <div class="kicker">Climate &amp; Africa · COP31 Antalya</div>
+        <h2>COP31 Launches 2nd Global Stocktake</h2>
+        <div class="viz" style="height: 78px; margin-bottom: 7px;">
+          <svg viewBox="0 0 300 78" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="78" fill="#f0fdf4"/>
+            <circle cx="52" cy="39" r="24" fill="#16a34a"/>
+            <text x="52" y="43" text-anchor="middle" fill="#fff" font-size="12" font-weight="900">GST2</text>
+            <text x="180" y="33" text-anchor="middle" fill="#14532d" font-size="13" font-weight="900">COP31 · ANTALYA</text>
+            <text x="180" y="51" text-anchor="middle" fill="#166534" font-size="11" font-weight="700">€14M Ethiopia Reforestation</text>
+          </svg>
+        </div>
+        <ul class="bullets">
+          <li><strong>Emissions Roadmap:</strong> COP31 negotiators officially launched the Second Global Stocktake (GST2) to guide long-term clean energy transitions.</li>
+          <li><strong>Africa Pledge:</strong> Denmark committed €14 million to support a major Ethiopian reforestation initiative.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="row-bot">
+    <article class="card science">
+      <div>
+        <div class="kicker">Space &amp; Planetary Science · NASA / UCLA</div>
+        <h2>Ancient Kuiper Belt Water Clues Found in Stratospheric Dust</h2>
+        <ul class="bullets">
+          <li><strong>ER-2 High-Altitude Discovery:</strong> Scientists at NASA Johnson Space Center and UCLA analyzed stratospheric dust and identified heavy-oxygen isotope signatures from ancient water beyond Neptune.</li>
+          <li><strong>Origin Insight:</strong> The chemical fingerprint illuminates how outer-solar-system ice shaped early planet formation.</li>
+        </ul>
+      </div>
+      <div class="viz" style="height: 46px; display:flex; align-items:center; justify-content:space-between; padding: 0 14px; background:#f5f3ff; border-color:#ddd6fe;">
+        <span style="font-size:12px; font-weight:800; color:#5b21b6;">NASA ER-2 · STRATOSPHERE</span>
+        <span style="font-size:12px; font-weight:800; color:#4c1d95;">HEAVY OXYGEN ISOTOPES → KUIPER BELT ICE</span>
+      </div>
+    </article>
+
+    <article class="card tech">
+      <div>
+        <div class="kicker">Clean Energy &amp; Computing · Córdoba / DOE</div>
+        <h2>Vitamin B12 Battery Prototype Reaches 250 Charge Cycles</h2>
+        <ul class="bullets">
+          <li><strong>Bio-Catalyzed Storage:</strong> University of Córdoba researchers unveiled a rechargeable battery using vitamin B12, offering a safer, lower-cost alternative to lithium-ion.</li>
+          <li><strong>Nuclear Supercomputing:</strong> Idaho National Laboratory launched <em>Arco</em>, the DOE's first dedicated nuclear energy HPC user facility.</li>
+        </ul>
+      </div>
+      <div class="viz" style="height: 46px; display:flex; align-items:center; justify-content:space-between; padding: 0 14px; background:#f0f9ff; border-color:#bae6fd;">
+        <span style="font-size:12px; font-weight:800; color:#0369a1;">250 CYCLES · VITAMIN B12</span>
+        <span style="font-size:12px; font-weight:800; color:#0c4a6e;">INL LAUNCHES “ARCO” SUPERCOMPUTER</span>
+      </div>
+    </article>
+  </section>
+
+  <footer class="footer">
+    <span>SOURCES: REUTERS, AP, PBS, GUARDIAN, NASA, UN OHCHR, ISW, SCIENCE DAILY</span>
+    <span>ALL EVENTS REPORTED FOR 18 NOVEMBER 2026</span>
+  </footer>
+</div>
+</body>
+</html>
